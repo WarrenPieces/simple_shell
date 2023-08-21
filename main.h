@@ -4,3 +4,4 @@
 #include <unistd.h>
 
 void execmd(char **argv);
+char *get_path(char *com);
