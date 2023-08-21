@@ -9,7 +9,7 @@
 int main(int ac, char **argv)
 {
 	char *prompt = "(CCS) $ ";
-	char *line = NULL, *line_c = NULL;
+	char *line = NULL;
 	size_t b = 0;
 	ssize_t char_read;
 	char *line_c = NULL;
@@ -18,7 +18,7 @@ int main(int ac, char **argv)
 	char *tkn;
 	int i1;
 
-	void(ac);
+	(void)ac;
 
 	while (1)
         {
