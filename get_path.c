@@ -2,51 +2,45 @@
 
 char *get_path(char *com)
 {
-
 	char *path_m;
 	char *path_c;
 	int com_len;
 	char *p_token;
 	int d_len;
 	char *f_path;
-	struct stat buffer;
+	struct stat buff;
 
 	path_m = getenv("PATH");
 
-	if (path_m)
+	if (!path_m)
 	{
-		path_c = strdup(path_m);
-		com_len = strlen(com);
-		p_token = strtok(path_c, ":");
-
-		while (p_token != NULL)
-		{
-			d_len = strlen(p_token);
-			f_path = malloc(com_len + d_len + 2);
-
-			strcpy(f_path, p_token);
-        		strcpy(f_path, "/");
-        		strcpy(f_path, com);
-        		strcpy(f_path, "\0");
-
-			if (stat(f_path, &buffer) == 0)
-			{
-				return (f_path);
-			}
-		}
+		return NULL;
 	}
-		else
-		{
-			p_token = strtok(NULL, ":");
-		}
 
-	if (stat(com, &buffer) == 0)
+	path_c = strdup(path_m);
+	com_len = strlen(com);
+	p_token = strtok(path_c, ":");
+
+	while (p_token != NULL)
 	{
-		return (com);
+		d_len = strlen(p_token);
+		f_path = malloc(d_len + com_len + 2);
+
+		strcpy(f_path, p_token);
+		strcat(f_path, "/");
+		strcat(f_path, com);
+		strcat(f_path, "\0");
+
+	if (stat(f_path, &buff) == 0)
+	{
+		free(path_c);
+		return (f_path);
 	}
-	
-	free(path_c);
+
 	free(f_path);
+	p_token = strtok(NULL, ":");
+	}
 
+	free(path_c);
 	return (NULL);
 }
