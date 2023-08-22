@@ -60,12 +60,13 @@ int main(int ac, char **argv, char **envp)
 
         cmd_argv[i1] = NULL;
 
-        if (argv[0] != NULL && strcmp(argv[0], "exit") == 0)
-       {
+        if (cmd_argv[0] != NULL && strcmp(cmd_argv[0], "exit") == 0)
+        {
             free(line);
-            free(line_c);
+            free(cmd_argv);
             return 0;
         }
+
         execmd(cmd_argv, envp);
 
         for (i1 = 0; cmd_argv[i1]; i1++)
