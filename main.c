@@ -16,7 +16,7 @@
 
 int main(int ac, char **argv, char **envp)
 {
-	char *prompt = "(CCS) $ ";
+	char *prompt = "($ ";
 	char *line = NULL, *line_c, *tkn;
 	const char *dlim = " \t\r\n";
 	int tkn_num, i;

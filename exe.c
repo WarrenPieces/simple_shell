@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * execmd - Executes a command.
+ * @argv: Argument values.
+ * @envp: Environment variables.
+ * Return: void.
+ */
+
 void execmd(char **argv, char **envp)
 {
 	pid_t pid;
@@ -30,10 +37,10 @@ void execmd(char **argv, char **envp)
 	}
 	else
 	{
-		do
-		{
-			waitpid(pid, &status, WUNTRACED);
-		}
+
+	do	{
+		waitpid(pid, &status, WUNTRACED);
+	}
 			while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 
