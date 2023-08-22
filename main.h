@@ -11,5 +11,8 @@
 
 void execmd(char **argv, char **envp);
 char *get_path(char *com);
+char **tokenize_input(char *line, const char *dlim);
+void free_cmd_argv(char **cmd_argv);
+int process_input(char *line, const char *dlim, char **envp);
 
 #endif
