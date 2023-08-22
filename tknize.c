@@ -1,10 +1,13 @@
 #include "main.h"
 
 /**
- * tokenize_input - Tokenizes the input line.
- * @line: Line to tokenize.
- * @dlim: Delimiter.
- * Return: A pointer to an array of tokenized arguments.
+ * tokenize_input - tokenize input
+ *
+ * @line: input
+ *
+ * @dlim: delimiter
+ *
+ * Return: always 0
  */
 
 char **tokenize_input(char *line, const char *dlim)

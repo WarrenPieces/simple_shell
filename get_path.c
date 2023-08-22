@@ -1,9 +1,11 @@
 #include "main.h"
 
 /**
- * get_path - Retrieves the full path for a given command.
- * @com: The command for which the full path is required.
- * Return: The full path for the command if found, NULL otherwise.
+ * get_path - gets path
+ *
+ * @com: command
+ *
+ * Return: always 0
  */
 
 char *get_path(char *com)

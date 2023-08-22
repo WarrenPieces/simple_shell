@@ -1,8 +1,9 @@
 #include "main.h"
 
 /**
- * free_cmd_argv - Frees the command arguments.
- * @cmd_argv: Command arguments to free.
+ * free_cmd_argv - free com arg
+ *
+ * @cmd_argv: com arg to free
  */
 
 void free_cmd_argv(char **cmd_argv)

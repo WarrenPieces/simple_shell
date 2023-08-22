@@ -1,15 +1,18 @@
 #include "main.h"
 
 /**
- * execmd - Executes a command.
- * @argv: Argument values.
- * @envp: Environment variables.
- * Return: void.
+ * execmd - exe command
+ *
+ * @argv: arg val
+ *
+ * @envp: environment var
+ *
+ * Return: always 0
  */
 
 void execmd(char **argv, char **envp)
 {
-	pid_t pid;
+	pid_t pid1;
 	int status;
 	char *path;
 
@@ -24,14 +27,14 @@ void execmd(char **argv, char **envp)
 		return;
 	}
 
-	pid = fork();
-	if (pid == 0)
+	pid1 = fork();
+	if (pid1 == 0)
 	{
 		execve(path, argv, envp);
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
-	else if (pid < 0)
+	else if (pid1 < 0)
 	{
 		perror("fork");
 	}
