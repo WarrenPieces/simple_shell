@@ -8,7 +8,7 @@
 
 int main(int ac, char **argv, char **envp)
 {
-    char *prompt = "(CCS) $ ";
+    char *prompt = "$ ";
     char *line = NULL;
     size_t b = 0;
     ssize_t char_read;
