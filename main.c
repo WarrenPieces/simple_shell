@@ -1,16 +1,13 @@
 #include "main.h"
 
 /**
- * main - main function
- *
- * Return: always 0
- */
-
-/**
  * main - A shell emulation.
  * @ac: Argument count.
+ *
  * @argv: Argument values.
+ *
  * @envp: Environment variables.
+ *
  * Return: 0 on success, -1 on failure.
  */
 
