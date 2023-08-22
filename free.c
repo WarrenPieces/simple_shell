@@ -7,9 +7,9 @@
 
 void free_cmd_argv(char **cmd_argv)
 {
-    int i;
+	int i1;
 
-    for (i = 0; cmd_argv[i]; i++)
-        free(cmd_argv[i]);
-    free(cmd_argv);
+	for (i1 = 0; cmd_argv[i1]; i1++)
+		free(cmd_argv[i1]);
+	free(cmd_argv);
 }
