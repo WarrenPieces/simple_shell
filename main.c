@@ -64,8 +64,6 @@ int main(int ac, char **argv)
 		}
 
 		argv[i1] = NULL;
-
-		execmd(argv);
 	}
 
 	free(line);

@@ -1,26 +1,29 @@
 #include "main.h"
 
-void execmd(char **argv)
+void execmd(char **argv, char envrn)
 {
 	char *com = NULL;
 	char *true_com = NULL;
-	char **envrn = envrn;
+	int i1 = 0;
 
-	if (argv)
+	if (argv && argv[0])
 	{
 		com = argv[0];
 
 		if (strcmp(com, "exit") == 0)
 		{
-			free(true_com);
+			for (i1 = 0; argv[i1] != NULL; i1++)
+			{
+				free(argv[i1]);
+			}
 			free(argv);
 			exit(0);
 		}
 		else if (strcmp(com, "env") == 0)
 		{
-			while (*envrn)
+			while (envrn)
 			{
-				printf("%s\n", *envrn);
+				printf("%d\n", envrn);
 				envrn++;
 			}
 		}
@@ -37,10 +40,14 @@ void execmd(char **argv)
 			}
 			else
 			{
-				fprintf(stderr, "Command not found... %s\n", com);
+				printf("Command not found... %s\n", com);
 			}
 
 			free(true_com);
+			 for (i1 = 0; argv[i1] != NULL; i1++)
+			 {
+				free(argv[i1]);
+			 }
 			free(argv);
 		}
 	}
