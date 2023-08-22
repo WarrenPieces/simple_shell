@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-void execmd(char **argv, char envrn);
+void execmd(char **argv, char **envp);
 char *get_path(char *com);
 
 #endif
