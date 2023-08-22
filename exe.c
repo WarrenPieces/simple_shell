@@ -4,7 +4,7 @@ void execmd(char **argv)
 {
 	char *com = NULL;
 	char *true_com = NULL;
-	char **envrn = environ;
+	char **envrn = envrn;
 
 	if (argv)
 	{
@@ -37,7 +37,7 @@ void execmd(char **argv)
 			}
 			else
 			{
-				printf(stderr, "Command not found... %s\n", com);
+				fprintf(stderr, "Command not found... %s\n", com);
 			}
 
 			free(true_com);
