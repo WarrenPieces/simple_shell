@@ -2,44 +2,39 @@
 
 void execmd(char **argv, char **envp)
 {
-    char *com = NULL;
-    char *true_com = NULL;
+    pid_t pid;
+    int status;
+    char *path;
 
-    if (argv && argv[0])
+    if (!argv || !argv[0])
+        return;
+
+    path = get_path(argv[0]);
+
+    if (path == NULL)
     {
-        com = argv[0];
-
-        if (strcmp(com, "exit") == 0)
-        {
-            free(argv);
-            exit(0);
-        }
-        else if (strcmp(com, "env") == 0)
-        {
-            while (*envp)
-            {
-                printf("%s\n", *envp);
-                envp++;
-            }
-        }
-        else
-        {
-            true_com = get_path(com);
-
-            if (true_com)
-            {
-                if (execve(true_com, argv, envp) == -1)
-                {
-                    perror("ERROR...");
-                }
-            }
-            else
-            {
-                fprintf(stderr, "Command not found... %s\n", com);
-            }
-
-            free(true_com);
-        }
-        free(argv);
+        fprintf(stderr, "Command not found: %s\n", argv[0]);
+        return;
     }
+
+    pid = fork();
+    if (pid == 0)
+    {
+        execve(path, argv, envp);
+        perror("execve");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid < 0)
+    {
+        perror("fork");
+    }
+    else
+    {
+        do
+        {
+            waitpid(pid, &status, WUNTRACED);
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    }
+
+    free(path);
 }
