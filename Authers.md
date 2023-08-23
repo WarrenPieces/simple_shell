@@ -1,2 +1,2 @@
-Coenraad Crause(mostly)
-Christo de Vries(very little)
+Coenraad Crause
+Christo de Vries
