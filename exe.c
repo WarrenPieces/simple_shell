@@ -42,7 +42,7 @@ void execmd(char **argv, char **envp)
 	{
 
 	do	{
-		waitpid(pid, &status, WUNTRACED);
+		waitpid(pid1, &status, WUNTRACED);
 	}
 			while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
