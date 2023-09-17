@@ -4,37 +4,50 @@
  * tokenize_input - tokenize input
  *
  * @line: input
- *
  * @dlim: delimiter
  *
- * Return: always 0
+ * Return: array of tokens
  */
 
-char **tokenize_input(char *line, const char *dlim)
+char **tokenize_input(const char *line, const char *dlim)
 {
-	char *line_c, *tkn;
-	int tkn_num, i;
-	char **cmd_argv;
+	char *line_copy = strdup(line);
 
-	line_c = strdup(line);
-	tkn_num = 0;
-	tkn = strtok(line_c, dlim);
-
-	while (tkn)
+	if (!line_copy)
 	{
-		tkn_num++;
-		tkn = strtok(NULL, dlim);
+		perror("strdup");
+		exit(EXIT_FAILURE);
 	}
-	free(line_c);
 
-	cmd_argv = malloc(sizeof(char *) * (tkn_num + 1));
-	tkn = strtok(line, dlim);
-	for (i = 0; tkn; i++)
+	char **tokens = NULL;
+	int token_count = 0;
+	char *token = strtok(line_copy, dlim);
+
+	while (token)
 	{
-		cmd_argv[i] = strdup(tkn);
-		tkn = strtok(NULL, dlim);
+		token_count++;
+		tokens = realloc(tokens, sizeof(char *) * token_count);
+		if (!tokens)
+		{
+			perror("realloc");
+			exit(EXIT_FAILURE);
+		}
+		tokens[token_count - 1] = strdup(token);
+		if (!tokens[token_count - 1])
+		{
+			perror("strdup");
+			exit(EXIT_FAILURE);
+		}
+		token = strtok(NULL, dlim);
 	}
-	cmd_argv[i] = NULL;
 
-	return (cmd_argv);
+	tokens = realloc(tokens, sizeof(char *) * (token_count + 1));
+	if (!tokens)
+	{
+		perror("realloc");
+		exit(EXIT_FAILURE);
+	}
+	tokens[token_count] = NULL;
+	free(line_copy);
+	return (tokens);
 }
