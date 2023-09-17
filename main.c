@@ -28,15 +28,25 @@ int main(int ac, char **argv, char **envp)
 		printf("%s", prompt);
 		char_read = getline(&line, &b, stdin);
 
-	if (char_read == -1)
-	{
-		printf("Ending Shell...\n");
-		free(line);
-		return (-1);
-	}
+		if (char_read == -1)
+		{
+			printf("Ending Shell...\n");
+			free(line);
+			return (-1);
+		}
 
-	if (process_input(line, dlim, envp))
-		break;
+		char *token = strtok(line, "|");
+
+		while (token)
+		{
+			int result = process_input(token, dlim, envp);
+
+			if (result == 1)
+			{
+				break;
+			}
+			token = strtok(NULL, "|");
+		}
 	}
 
 	free(line);

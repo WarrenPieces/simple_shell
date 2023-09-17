@@ -30,9 +30,11 @@ void execmd(char **argv, char **envp)
 	pid1 = fork();
 	if (pid1 == 0)
 	{
-		execve(path, argv, envp);
-		perror("execve");
-		exit(EXIT_FAILURE);
+		if (execve(path, arg, envp) == -1)
+		{
+			perror("execve");
+			exit(EXIT_FAILURE);
+		}
 	}
 	else if (pid1 < 0)
 	{
@@ -40,12 +42,11 @@ void execmd(char **argv, char **envp)
 	}
 	else
 	{
-
-	do	{
-		waitpid(pid1, &status, WUNTRACED);
+		do
+		{
+			waitpid(pid1, &status, WUNTRACED);
+		}
+		while(!WIFEXITED(status) && !WIFESIGNALED(status));
 	}
-			while (!WIFEXITED(status) && !WIFSIGNALED(status));
-	}
-
 	free(path);
 }
