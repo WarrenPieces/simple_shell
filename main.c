@@ -25,6 +25,7 @@ int main(int ac, char **argv, char **envp)
 
 	while (1)
 	{
+		char *token = strtok(line, "|");
 		printf("%s", prompt);
 		char_read = getline(&line, &b, stdin);
 
@@ -34,8 +35,6 @@ int main(int ac, char **argv, char **envp)
 			free(line);
 			return (-1);
 		}
-
-		char *token = strtok(line, "|");
 
 		while (token)
 		{

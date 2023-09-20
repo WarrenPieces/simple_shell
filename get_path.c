@@ -19,13 +19,18 @@ char *get_path(char *com)
 	struct stat buff;
 
 	path_m = getenv("PATH");
-
-	if (!path_m || path_m[0] == '\0')
+	
+	if (strchr(com, '/') != NULL)
 	{
 		if (stat(com, &buff) == 0)
 		{
 			return strdup(com);
 		}
+		return NULL;
+	}
+
+	if (!path_m || path_m[0] == '\0')
+	{
 		return (NULL);
 	}
 

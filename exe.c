@@ -15,11 +15,12 @@ void execmd(char **argv, char **envp)
 	pid_t pid1;
 	int status;
 	char *path;
+	char *clean_command = strtrim(argv[0]);
 
 	if (!argv || !argv[0])
-	return;
-	
-	char *clean_command = strtrim(argv[0]);
+	{
+		return;
+	}
 
 	path = get_path(clean_command);
 
@@ -49,7 +50,7 @@ void execmd(char **argv, char **envp)
 		{
 			waitpid(pid1, &status, WUNTRACED);
 		}
-		while(!WIFEXITED(status) && !WIFESIGNALED(status));
+		while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 	free(path);
 	free(clean_command);
