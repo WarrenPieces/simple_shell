@@ -20,8 +20,12 @@ char *get_path(char *com)
 
 	path_m = getenv("PATH");
 
-	if (!path_m)
+	if (!path_m || path_m[0] == '\0')
 	{
+		if (stat(com, &buff) == 0)
+		{
+			return strdup(com);
+		}
 		return (NULL);
 	}
 

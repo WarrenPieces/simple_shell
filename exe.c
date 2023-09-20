@@ -18,12 +18,15 @@ void execmd(char **argv, char **envp)
 
 	if (!argv || !argv[0])
 	return;
+	
+	char *clean_command = strtrim(argv[0]);
 
-	path = get_path(argv[0]);
+	path = get_path(clean_command);
 
 	if (path == NULL)
 	{
 		fprintf(stderr, "Command not found: %s\n", argv[0]);
+		free(clean_command);
 		return;
 	}
 
@@ -49,4 +52,5 @@ void execmd(char **argv, char **envp)
 		while(!WIFEXITED(status) && !WIFESIGNALED(status));
 	}
 	free(path);
+	free(clean_command);
 }
