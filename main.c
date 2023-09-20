@@ -19,13 +19,13 @@ int main(int ac, char **argv, char **envp)
 	const char *dlim = " \t\r\n";
 	size_t b = 0;
 	ssize_t char_read;
+	char *token;
 
 	(void)ac;
 	(void)argv;
 
 	while (1)
 	{
-		char *token = strtok(line, "|");
 		printf("%s", prompt);
 		char_read = getline(&line, &b, stdin);
 
@@ -35,6 +35,8 @@ int main(int ac, char **argv, char **envp)
 			free(line);
 			return (-1);
 		}
+
+		token = strtok(line, "|");
 
 		while (token)
 		{

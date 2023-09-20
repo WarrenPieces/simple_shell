@@ -15,7 +15,7 @@
 int process_input(char *line, const char *dlim, char **envp)
 {
 	char **cmd_argv;
-	
+
 	if (line == NULL || strtrim(line) == NULL)
 	{
 		return (0);
