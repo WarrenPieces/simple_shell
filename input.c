@@ -15,6 +15,11 @@
 int process_input(char *line, const char *dlim, char **envp)
 {
 	char **cmd_argv;
+	
+	if (line == NULL || strtrim(line) == NULL)
+	{
+		return (0);
+	}
 
 	cmd_argv = tokenize_input(line, dlim);
 

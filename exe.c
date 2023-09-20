@@ -33,7 +33,7 @@ void execmd(char **argv, char **envp)
 	pid1 = fork();
 	if (pid1 == 0)
 	{
-		if (execve(path, arg, envp) == -1)
+		if (execve(path, argv, envp) == -1)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);

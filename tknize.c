@@ -12,6 +12,9 @@
 char **tokenize_input(const char *line, const char *dlim)
 {
 	char *line_copy = strdup(line);
+	char **tokens = NULL;
+        int token_count = 0;
+        char *token = strtok(line_copy, dlim);
 
 	if (!line_copy)
 	{
@@ -19,12 +22,13 @@ char **tokenize_input(const char *line, const char *dlim)
 		exit(EXIT_FAILURE);
 	}
 
-	char **tokens = NULL;
-	int token_count = 0;
-	char *token = strtok(line_copy, dlim);
-
 	while (token)
 	{
+		if (strlen(token) > 0)
+		{
+			token_count++;
+			tokens = realloc(tokens, sizeof(char *) * token_count);
+		}
 		token_count++;
 		tokens = realloc(tokens, sizeof(char *) * token_count);
 		if (!tokens)
