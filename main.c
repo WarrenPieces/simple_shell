@@ -48,8 +48,7 @@ int main(int ac, char **argv, char **envp)
 			}
 			token = strtok(NULL, "|");
 		}
+		free(line);
 	}
-
-	free(line);
 	return (0);
 }

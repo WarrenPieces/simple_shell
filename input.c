@@ -15,8 +15,14 @@
 int process_input(char *line, const char *dlim, char **envp)
 {
 	char **cmd_argv;
+	char *trimmed_line = strtrim(line);
 
-	if (line == NULL || strtrim(line) == NULL)
+	if (line == NULL)
+	{
+		return (0);
+	}
+
+	if (trimmed_line == NULL)
 	{
 		return (0);
 	}
@@ -26,10 +32,12 @@ int process_input(char *line, const char *dlim, char **envp)
 	if (cmd_argv[0] && strcmp(cmd_argv[0], "exit") == 0)
 	{
 		free_cmd_argv(cmd_argv);
+		free(trimmed_line);
 		return (1);
 	}
 	execmd(cmd_argv, envp);
 	free_cmd_argv(cmd_argv);
+	free(trimmed_line);
 
 	return (0);
 }

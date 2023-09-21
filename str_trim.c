@@ -7,6 +7,7 @@ char *strtrim(char *str)
 
 	if (str == NULL)
 	{
+		printf("strtrim: received NULL pointer\n");
 		return (NULL);
 	}
 
@@ -17,8 +18,14 @@ char *strtrim(char *str)
 
 	if (*strt == '\0')
 	{
-		*str = '\0';
-		return str;
+		char *rslt = malloc(1);
+		if (rslt == NULL)
+		{
+			perror("malloc");
+			exit(EXIT_FAILURE);
+		}
+		rslt[0] = '\0';
+		return rslt;
 	}
 
 	while (end > strt && isspace((unsigned char)*end))

@@ -17,7 +17,7 @@ void execmd(char **argv, char **envp)
 	char *path;
 	char *clean_command = strtrim(argv[0]);
 
-	if (!argv || !argv[0])
+	if (!argv || !argv[0] || !argv[0][0])
 	{
 		return;
 	}
